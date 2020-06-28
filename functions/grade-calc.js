@@ -1,6 +1,6 @@
 const gradeCalc = (studentScore, totalScore) => {
 	let letter;
-	let score = (studentScore / totalScore) * 100;
+	const score = (studentScore / totalScore) * 100;
 	if (score >= 90) letter = "A";
 	else if (score >= 80) letter = "B";
 	else if (score >= 70) letter = "C";
@@ -9,5 +9,5 @@ const gradeCalc = (studentScore, totalScore) => {
 	return `You got a ${letter} (${score}%)`;
 };
 
-let result = gradeCalc(20, 20);
+const result = gradeCalc(20, 20);
 console.log(result);
