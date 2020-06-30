@@ -12,13 +12,15 @@
       Search:
     <input id="search-text" type="text" placeholder="Filter your notes" />
   </label>
+    <select id="filter-by">
+      <option value="byEdited">Sort by Last Edited</option>
+      <option value="byCreated">Sort by Last Edited</option>
+      <option value="alphabetical">Sort by Alphabetically</option>
+    </select>
 		<div id="notes"></div>
-		<button id="create-note">Create Note</button>
-
-		<label>
-      <input type="checkbox" id="for-fun"/>
-      Check me for fun
-    </label>
+    <button id="create-note">Create Note</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
+    <script src="notes-functions.js"></script>
 		<script src="notes-app.js"></script>
 	</body>
 </html>
