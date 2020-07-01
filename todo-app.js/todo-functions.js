@@ -5,15 +5,31 @@ const getTodos = () => {
 
 const saveTodos = () => localStorage.setItem("todos", JSON.stringify(todos));
 
+const removeTodo = id => {
+  const index = todos.findIndex((todo) => todo.id === id); 
+  index > -1 && todos.splice(index, 1);
+  saveTodos(todos);
+  renderTodos(todos, filters);
+}
+
+const toggleTodo = id => {
+  const todo = todos.find((todo) => todo.id === id); 
+  todo !== undefined && (todo.completed = !todo.completed);
+  saveTodos(todos);
+  renderTodos(todos, filters);
+}
+
 //Get the DOM element for an individual note
 const generateTodo = todo => {
   const todoItem = document.createElement("div");
   const checkbox = document.createElement("input");
   const text = document.createElement("span");
-  const button = document.createElement("button");
+  const removeButton = document.createElement("button");
 
   //Setup todo checkbox
   checkbox.setAttribute("type", "checkbox");
+  checkbox.addEventListener("change", () => toggleTodo(todo.id));
+  checkbox.checked = todo.completed;
   todoItem.appendChild(checkbox);
 
   //Setup the todo text
@@ -21,9 +37,9 @@ const generateTodo = todo => {
   todoItem.appendChild(text);
 
   //Setup the remove button
-  button.textContent = "x"
-  todoItem.appendChild(button);
-  
+  removeButton.textContent = "x"
+  todoItem.appendChild(removeButton);
+  removeButton.addEventListener("click", () => removeTodo(todo.id));
 	return todoItem;
 };
 

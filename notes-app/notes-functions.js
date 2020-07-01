@@ -1,4 +1,4 @@
-console.log(uuidv4())
+console.log(uuidv4());
 const getSavedNotes = () => {
 	const notesJSON = localStorage.getItem("notes");
 	if (notesJSON !== null) return JSON.parse(notesJSON);
@@ -7,18 +7,29 @@ const getSavedNotes = () => {
 
 // Generate the DOM structure for the note
 const generateNoteDOM = note => {
-  const noteEl = document.createElement("div");
-  const textEl = document.createElement("span");
-  const button = document.createElement('button');
+	const noteEl = document.createElement("div");
+	const textEl = document.createElement("span");
+	const button = document.createElement("button");
 
-  // Setup the remove note button
-  button.textContent = "x"
-  noteEl.appendChild(button);
+  //Remove a note from the list
+	const removeNote = id => {
+		const noteIndex = notes.findIndex(() => note.id === id);
+		noteIndex > -1 && notes.splice(noteIndex, 1);
+	};
 
-  // Setup the note title text
+	// Setup the remove note button
+	button.textContent = "x";
+	noteEl.appendChild(button);
+	button.addEventListener("click", () => {
+		removeNote(note.id);
+		saveNotes(notes);
+		renderNotes(notes, filters);
+	});
+
+	// Setup the note title text
 	if (note.title.length > 0) textEl.textContent = note.title;
-  else textEl.textContent = "Unnamed Note";
-  noteEl.appendChild(textEl);
+	else textEl.textContent = "Unnamed Note";
+	noteEl.appendChild(textEl);
 	return noteEl;
 };
 
@@ -33,4 +44,4 @@ const renderNotes = (notes, filters) => {
 	});
 };
 
-const saveNotes = (notes) => localStorage.setItem("notes", JSON.stringify(notes));
+const saveNotes = notes => localStorage.setItem("notes", JSON.stringify(notes));
