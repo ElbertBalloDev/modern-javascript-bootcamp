@@ -1,21 +1,20 @@
-console.log(uuidv4());
 const getSavedNotes = () => {
 	const notesJSON = localStorage.getItem("notes");
 	if (notesJSON !== null) return JSON.parse(notesJSON);
 	else return [];
 };
 
+//Remove a note from the list
+const removeNote = id => {
+	const noteIndex = notes.findIndex(note => note.id === id);
+	noteIndex > -1 && notes.splice(noteIndex, 1);
+};
+
 // Generate the DOM structure for the note
 const generateNoteDOM = note => {
 	const noteEl = document.createElement("div");
-	const textEl = document.createElement("span");
+	const textEl = document.createElement("a");
 	const button = document.createElement("button");
-
-  //Remove a note from the list
-	const removeNote = id => {
-		const noteIndex = notes.findIndex(() => note.id === id);
-		noteIndex > -1 && notes.splice(noteIndex, 1);
-	};
 
 	// Setup the remove note button
 	button.textContent = "x";
@@ -29,6 +28,7 @@ const generateNoteDOM = note => {
 	// Setup the note title text
 	if (note.title.length > 0) textEl.textContent = note.title;
 	else textEl.textContent = "Unnamed Note";
+	textEl.setAttribute("href", `/edit.html#${note.id}`);
 	noteEl.appendChild(textEl);
 	return noteEl;
 };

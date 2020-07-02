@@ -23,7 +23,7 @@ const toggleTodo = id => {
 const generateTodo = todo => {
   const todoItem = document.createElement("div");
   const checkbox = document.createElement("input");
-  const text = document.createElement("span");
+  const text = document.createElement("a");
   const removeButton = document.createElement("button");
 
   //Setup todo checkbox
@@ -35,6 +35,7 @@ const generateTodo = todo => {
   //Setup the todo text
   text.textContent = todo.task.length > 0 ? todo.task : "Unnamed Task";
   todoItem.appendChild(text);
+  text.setAttribute("href", "/edit.html")
 
   //Setup the remove button
   removeButton.textContent = "x"
