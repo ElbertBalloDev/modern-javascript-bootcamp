@@ -32,3 +32,6 @@ window.addEventListener("storage", e => {
     renderNotes(notes, filters);
 	}
 });
+
+const now = moment();
+console.log(now.toString());
